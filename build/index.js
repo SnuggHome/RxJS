@@ -4,7 +4,7 @@ var concat = require('./concat');
 
 var noop = function(){};
 
-var files = watch('src/**/*.js');
+var files = watch('src/**/*.js', true);
 
 babelTranspile(files, 'src/', 'dist/cjs/', {
   sourceMaps: true,
