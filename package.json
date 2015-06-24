@@ -4,15 +4,13 @@
   "description": "Reactive Extensions for modern JavaScript",
   "main": "lib/RxNext.js",
   "scripts": {
-    "build_global": "rm -rf dist/global && mkdir dist/global && browserify src/RxNext.global.js --outfile dist/global/RxNext.js",
     "build_es6": "rm -rf dist/es6 && tsc src/RxNext.ts --outDir dist/es6 --target ES6 -d",
-    "build_cjs": "rm -rf dist/cjs && babel dist/es6 --out-dir dist/cjs --modules common -s=true --loose all",
-    "build_amd": "rm -rf dist/amd && babel dist/es6 --out-dir dist/amd --modules amd -s=true --loose all",
-    "build_test": "rm -rf dist/ && npm run build_es6 && npm run build_cjs && jasmine",
+    "build_babel": "rm -rf dist/cjs && babel dist/es6 --optional=runtime --out-dir=dist/cjs -s=true -L",
+    "build_test": "rm -rf dist/ && npm run build_es6 && npm run build_babel && jasmine",
     "test": "jasmine",
-    "build_all": "rm -rf lib && npm run build_es6 && npm run build_amd && npm run build_cjs && npm run build_global && cp -r dist/cjs lib && rm -rf dist",
+    "build_all": "rm -rf lib && npm run build_es6 && npm run build_babel && cp -r dist/cjs lib && rm -rf dist",
     "perf": "protractor protractor.conf.js",
-    "build_perf": "npm run build_es6 && npm run build_cjs && npm run perf"
+    "build_perf": "npm run build_es6 && npm run build_babel && npm run perf"
   },
   "repository": {
     "type": "git",
@@ -37,6 +35,8 @@
   },
   "homepage": "https://github.com/ReactiveX/RxJS",
   "devDependencies": {
+    "babel": "^5.6.5",
+    "babel-core": "^5.6.5",
     "babelify": "^6.1.2",
     "benchmark": "^1.0.0",
     "benchpress": "^2.0.0-alpha.25",

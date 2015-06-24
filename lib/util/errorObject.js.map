@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../es6/util/errorObject.js"],"names":[],"mappings":";;;AAAA,IAAI,WAAW,GAAG,EAAE,CAAC,EAAE,EAAE,EAAE,CAAC;qBACb,WAAW","file":"dist/es6/util/errorObject.js","sourcesContent":["var errorObject = { e: {} };\nexport default errorObject;\n"]}
+{"version":3,"sources":["../../es6/util/errorObject.js"],"names":[],"mappings":";;;AAAA,IAAI,WAAW,GAAG,EAAE,CAAC,EAAE,EAAE,EAAE,CAAC;qBACb,WAAW","file":"errorObject.js","sourcesContent":["var errorObject = { e: {} };\nexport default errorObject;\n"]}
