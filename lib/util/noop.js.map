@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../es6/util/noop.js"],"names":[],"mappings":";;;AAAA,SAAS,IAAI,GAAG,EACf;qBACc,IAAI","file":"dist/es6/util/noop.js","sourcesContent":["function noop() {\n}\nexport default noop;\n"]}

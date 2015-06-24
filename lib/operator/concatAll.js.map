@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../es6/operator/concatAll.js"],"names":[],"mappings":";;;qBACwB,SAAS;;wBADZ,YAAY;;;;AAClB,SAAS,SAAS,GAAG;AAChC,WAAO,sBAAS,IAAI,CAAC,IAAI,EAAE,CAAC,CAAC,CAAC;CACjC","file":"dist/es6/operator/concatAll.js","sourcesContent":["import mergeAll from './mergeAll';\nexport default function concatAll() {\n    return mergeAll.call(this, 1);\n}\n"]}
