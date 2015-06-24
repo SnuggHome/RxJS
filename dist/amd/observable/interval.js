@@ -3,17 +3,17 @@ define(['exports', 'module', '../Observable', '../Observer', '../scheduler/nextT
 
     module.exports = timer;
 
-    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+    function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
 
     function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
     function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
-    var _Observable3 = _interopRequireDefault(_Observable2);
+    var _Observable3 = _interopRequire(_Observable2);
 
-    var _Observer3 = _interopRequireDefault(_Observer2);
+    var _Observer3 = _interopRequire(_Observer2);
 
-    var _nextTick = _interopRequireDefault(_schedulerNextTick);
+    var _nextTick = _interopRequire(_schedulerNextTick);
 
     var IntervalObservable = (function (_Observable) {
         function IntervalObservable(interval, scheduler) {
@@ -31,7 +31,7 @@ define(['exports', 'module', '../Observable', '../Observer', '../scheduler/nextT
         };
 
         return IntervalObservable;
-    })(_Observable3['default']);
+    })(_Observable3);
 
     var IntervalObserver = (function (_Observer) {
         function IntervalObserver(destination, interval, scheduler) {
@@ -53,7 +53,7 @@ define(['exports', 'module', '../Observable', '../Observer', '../scheduler/nextT
         };
 
         return IntervalObserver;
-    })(_Observer3['default']);
+    })(_Observer3);
 
     function dispatch(observer) {
         observer.emitNext();
@@ -61,7 +61,7 @@ define(['exports', 'module', '../Observable', '../Observer', '../scheduler/nextT
 
     function timer() {
         var interval = arguments[0] === undefined ? 0 : arguments[0];
-        var scheduler = arguments[1] === undefined ? _nextTick['default'] : arguments[1];
+        var scheduler = arguments[1] === undefined ? _nextTick : arguments[1];
 
         return new IntervalObservable(interval, scheduler);
     }

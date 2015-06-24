@@ -3,17 +3,17 @@ define(['exports', 'module', './errorObject'], function (exports, module, _error
 
     module.exports = tryCatch;
 
-    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+    function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
 
-    var _errorObj = _interopRequireDefault(_errorObject);
+    var _errorObj = _interopRequire(_errorObject);
 
     var tryCatchTarget;
     function tryCatcher() {
         try {
             return tryCatchTarget.apply(this, arguments);
         } catch (e) {
-            _errorObj['default'].e = e;
-            return _errorObj['default'];
+            _errorObj.e = e;
+            return _errorObj;
         }
     }
 

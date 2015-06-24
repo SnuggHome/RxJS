@@ -2,7 +2,7 @@
   "name": "RxJS-Next",
   "version": "0.0.0-prealpha.1",
   "description": "Reactive Extensions for modern JavaScript",
-  "main": "index.js",
+  "main": "lib/RxNext.js",
   "scripts": {
     "build_global": "rm -rf dist/global && mkdir dist/global && browserify src/RxNext.global.js --outfile dist/global/RxNext.js",
     "build_es6": "rm -rf dist/es6 && tsc src/RxNext.ts --outDir dist/es6 --target ES6 -d",
@@ -10,7 +10,7 @@
     "build_amd": "rm -rf dist/amd && babel dist/es6 --out-dir dist/amd --modules amd --sourceMaps --loose all",
     "build_test": "rm -rf dist/ && npm run build_es6 && npm run build_cjs && jasmine",
     "test": "jasmine",
-    "build_all": "npm run build_es6 && npm run build_amd && npm run build_cjs && npm run build_global",
+    "build_all": "rm -rf lib && npm run build_es6 && npm run build_amd && npm run build_cjs && npm run build_global && cp -r dist/cjs lib",
     "perf": "protractor protractor.conf.js",
     "build_perf": "npm run build_es6 && npm run build_cjs && npm run perf"
   },
@@ -47,6 +47,7 @@
     "lodash": "^3.5.0",
     "platform": "^1.3.0",
     "protractor": "^1.7.0",
-    "rx": "^2.4.3"
+    "rx": "^2.4.3",
+    "typescript": "^1.5.0-beta"
   }
 }

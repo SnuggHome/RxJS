@@ -1,15 +1,15 @@
 define(['exports', 'module', './Subscription', './util/arraySlice'], function (exports, module, _Subscription2, _utilArraySlice) {
     'use strict';
 
-    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+    function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
 
     function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
     function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
-    var _Subscription3 = _interopRequireDefault(_Subscription2);
+    var _Subscription3 = _interopRequire(_Subscription2);
 
-    var _arraySlice = _interopRequireDefault(_utilArraySlice);
+    var _arraySlice = _interopRequire(_utilArraySlice);
 
     var CompositeSubscription = (function (_Subscription) {
         function CompositeSubscription() {
@@ -36,7 +36,7 @@ define(['exports', 'module', './Subscription', './util/arraySlice'], function (e
                 return;
             }
             this.unsubscribed = true;
-            var subscriptions = (0, _arraySlice['default'])(this._subscriptions);
+            var subscriptions = _arraySlice(this._subscriptions);
             var subscriptionCount = subscriptions && subscriptions.length || 0;
             var subscriptionIndex = -1;
             this._subscriptions = undefined;
@@ -78,7 +78,7 @@ define(['exports', 'module', './Subscription', './util/arraySlice'], function (e
         };
 
         return CompositeSubscription;
-    })(_Subscription3['default']);
+    })(_Subscription3);
 
     module.exports = CompositeSubscription;
 });

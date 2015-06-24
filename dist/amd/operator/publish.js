@@ -3,12 +3,12 @@ define(['exports', 'module', '../Subject'], function (exports, module, _Subject)
 
     module.exports = publish;
 
-    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+    function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
 
-    var _Subject2 = _interopRequireDefault(_Subject);
+    var _Subject2 = _interopRequire(_Subject);
 
     function subjectFactory() {
-        return new _Subject2['default']();
+        return new _Subject2();
     }
 
     function publish() {

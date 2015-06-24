@@ -1,13 +1,13 @@
 define(['exports', 'module', './Subscription'], function (exports, module, _Subscription2) {
     'use strict';
 
-    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+    function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
 
     function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
     function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
-    var _Subscription3 = _interopRequireDefault(_Subscription2);
+    var _Subscription3 = _interopRequire(_Subscription2);
 
     var SerialSubscription = (function (_Subscription) {
         function SerialSubscription(subscription) {
@@ -55,7 +55,7 @@ define(['exports', 'module', './Subscription'], function (exports, module, _Subs
         };
 
         return SerialSubscription;
-    })(_Subscription3['default']);
+    })(_Subscription3);
 
     module.exports = SerialSubscription;
 });

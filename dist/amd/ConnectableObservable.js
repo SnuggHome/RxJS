@@ -1,19 +1,19 @@
 define(['exports', 'module', './Observable', './Observer', './util/Symbol_observer', './scheduler/nextTick'], function (exports, module, _Observable3, _Observer, _utilSymbol_observer, _schedulerNextTick) {
     'use strict';
 
-    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+    function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
 
     function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
     function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
-    var _Observable4 = _interopRequireDefault(_Observable3);
+    var _Observable4 = _interopRequire(_Observable3);
 
-    var _Observer2 = _interopRequireDefault(_Observer);
+    var _Observer2 = _interopRequire(_Observer);
 
-    var _$$observer = _interopRequireDefault(_utilSymbol_observer);
+    var _$$observer = _interopRequire(_utilSymbol_observer);
 
-    var _nextTick = _interopRequireDefault(_schedulerNextTick);
+    var _nextTick = _interopRequire(_schedulerNextTick);
 
     var ConnectableObservable = (function (_Observable) {
         function ConnectableObservable(source, subjectFactory) {
@@ -27,16 +27,16 @@ define(['exports', 'module', './Observable', './Observer', './util/Symbol_observ
         _inherits(ConnectableObservable, _Observable);
 
         ConnectableObservable.prototype.connect = function connect() {
-            return _nextTick['default'].schedule(0, this, dispatchConnection);
+            return _nextTick.schedule(0, this, dispatchConnection);
         };
 
         ConnectableObservable.prototype.connectSync = function connectSync() {
             return dispatchConnection(this);
         };
 
-        ConnectableObservable.prototype[_$$observer['default']] = function (observer) {
-            if (!(observer instanceof _Observer2['default'])) {
-                observer = new _Observer2['default'](observer);
+        ConnectableObservable.prototype[_$$observer] = function (observer) {
+            if (!(observer instanceof _Observer2)) {
+                observer = new _Observer2(observer);
             }
             if (!this.subject || this.subject.unsubscribed) {
                 if (this.subscription) {
@@ -44,7 +44,7 @@ define(['exports', 'module', './Observable', './Observer', './util/Symbol_observ
                 }
                 this.subject = this.subjectFactory();
             }
-            return this.subject[_$$observer['default']](observer);
+            return this.subject[_$$observer](observer);
         };
 
         ConnectableObservable.prototype.refCount = function refCount() {
@@ -52,7 +52,7 @@ define(['exports', 'module', './Observable', './Observer', './util/Symbol_observ
         };
 
         return ConnectableObservable;
-    })(_Observable4['default']);
+    })(_Observable4);
 
     module.exports = ConnectableObservable;
 
@@ -71,7 +71,7 @@ define(['exports', 'module', './Observable', './Observer', './util/Symbol_observ
             var _this = this;
 
             this.refCount++;
-            this.source[_$$observer['default']](observer);
+            this.source[_$$observer](observer);
             var shouldConnect = this.refCount === 1;
             if (shouldConnect) {
                 this.connectionSubscription = this.source.connectSync();
@@ -85,7 +85,7 @@ define(['exports', 'module', './Observable', './Observer', './util/Symbol_observ
         };
 
         return RefCountObservable;
-    })(_Observable4['default']);
+    })(_Observable4);
 
     function dispatchConnection(connectable) {
         if (!connectable.subscription) {

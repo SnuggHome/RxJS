@@ -3,11 +3,11 @@ define(['exports', 'module', '../Observable'], function (exports, module, _Obser
 
     module.exports = empty;
 
-    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+    function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
 
-    var _Observable2 = _interopRequireDefault(_Observable);
+    var _Observable2 = _interopRequire(_Observable);
 
-    var EMPTY = new _Observable2['default'](function (observer) {
+    var EMPTY = new _Observable2(function (observer) {
         observer['return']();
     });
 

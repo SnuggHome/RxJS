@@ -3,11 +3,11 @@ define(['exports', 'module', './mergeAll'], function (exports, module, _mergeAll
 
     module.exports = concatAll;
 
-    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+    function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
 
-    var _mergeAll2 = _interopRequireDefault(_mergeAll);
+    var _mergeAll2 = _interopRequire(_mergeAll);
 
     function concatAll() {
-        return _mergeAll2['default'].call(this, 1);
+        return _mergeAll2.call(this, 1);
     }
 });

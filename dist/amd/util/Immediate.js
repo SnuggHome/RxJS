@@ -1,17 +1,18 @@
 define(["exports", "module", "./root"], function (exports, module, _root) {
+    "use strict";
+
+    function _interopRequire(obj) { return obj && obj.__esModule ? obj["default"] : obj; }
+
     /**
     All credit for this helper goes to http://github.com/YuzuJS/setImmediate
     */
-    "use strict";
 
-    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-    var _JSGlobal = _interopRequireDefault(_root);
+    var _JSGlobal = _interopRequire(_root);
 
     var Immediate = {};
-    if (_JSGlobal["default"] && _JSGlobal["default"].setImmediate) {
-        Immediate.setImmediate = _JSGlobal["default"].setImmediate;
-        Immediate.clearImmediate = _JSGlobal["default"].clearImmediate;
+    if (_JSGlobal && _JSGlobal.setImmediate) {
+        Immediate.setImmediate = _JSGlobal.setImmediate;
+        Immediate.clearImmediate = _JSGlobal.clearImmediate;
     } else {
         Immediate = (function (global, Immediate) {
             var nextHandle = 1,
@@ -159,7 +160,7 @@ define(["exports", "module", "./root"], function (exports, module, _root) {
                     return handle;
                 };
             }
-        })(_JSGlobal["default"], Immediate);
+        })(_JSGlobal, Immediate);
     }
     module.exports = Immediate;
 });

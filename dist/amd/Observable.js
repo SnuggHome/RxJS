@@ -1,19 +1,19 @@
 define(['exports', 'module', './Observer', './Subscription', './SerialSubscription', './scheduler/nextTick', './util/Symbol_observer'], function (exports, module, _Observer, _Subscription, _SerialSubscription, _schedulerNextTick, _utilSymbol_observer) {
     'use strict';
 
-    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+    function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
 
     function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-    var _Observer2 = _interopRequireDefault(_Observer);
+    var _Observer2 = _interopRequire(_Observer);
 
-    var _Subscription2 = _interopRequireDefault(_Subscription);
+    var _Subscription2 = _interopRequire(_Subscription);
 
-    var _SerialSubscription2 = _interopRequireDefault(_SerialSubscription);
+    var _SerialSubscription2 = _interopRequire(_SerialSubscription);
 
-    var _nextTick = _interopRequireDefault(_schedulerNextTick);
+    var _nextTick = _interopRequire(_schedulerNextTick);
 
-    var _$$observer = _interopRequireDefault(_utilSymbol_observer);
+    var _$$observer = _interopRequire(_utilSymbol_observer);
 
     var Observable = (function () {
         function Observable(subscriber) {
@@ -32,11 +32,11 @@ define(['exports', 'module', './Observer', './Subscription', './SerialSubscripti
             return void 0;
         };
 
-        Observable.prototype[_$$observer['default']] = function (observer) {
-            if (!(observer instanceof _Observer2['default'])) {
-                observer = new _Observer2['default'](observer);
+        Observable.prototype[_$$observer] = function (observer) {
+            if (!(observer instanceof _Observer2)) {
+                observer = new _Observer2(observer);
             }
-            return _Subscription2['default'].from(this.subscriber(observer), observer);
+            return _Subscription2.from(this.subscriber(observer), observer);
         };
 
         Observable.prototype.subscribe = function subscribe(observerOrNextHandler) {
@@ -48,11 +48,11 @@ define(['exports', 'module', './Observer', './Subscription', './SerialSubscripti
             if (typeof observerOrNextHandler === 'object') {
                 observer = observerOrNextHandler;
             } else {
-                observer = _Observer2['default'].create(observerOrNextHandler, throwHandler, returnHandler, disposeHandler);
+                observer = _Observer2.create(observerOrNextHandler, throwHandler, returnHandler, disposeHandler);
             }
-            var subscription = new _SerialSubscription2['default'](null);
+            var subscription = new _SerialSubscription2(null);
             subscription.observer = observer;
-            subscription.add(_nextTick['default'].schedule(0, [observer, this], dispatchSubscription));
+            subscription.add(_nextTick.schedule(0, [observer, this], dispatchSubscription));
             return subscription;
         };
 
@@ -60,7 +60,7 @@ define(['exports', 'module', './Observer', './Subscription', './SerialSubscripti
             var _this = this;
 
             return new Promise(function (resolve, reject) {
-                var observer = _Observer2['default'].create(function (value) {
+                var observer = _Observer2.create(function (value) {
                     nextHandler(value);
                     return { done: false };
                 }, function (err) {
@@ -70,7 +70,7 @@ define(['exports', 'module', './Observer', './Subscription', './SerialSubscripti
                     resolve(value);
                     return { done: true };
                 });
-                _this[_$$observer['default']](observer);
+                _this[_$$observer](observer);
             });
         };
 
@@ -83,6 +83,6 @@ define(['exports', 'module', './Observer', './Subscription', './SerialSubscripti
         var observer = _ref[0];
         var observable = _ref[1];
 
-        return observable[_$$observer['default']](observer);
+        return observable[_$$observer](observer);
     }
 });

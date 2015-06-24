@@ -1,17 +1,17 @@
 define(['exports', 'module', './Observable', './util/Symbol_observer', './Subscription'], function (exports, module, _Observable2, _utilSymbol_observer, _Subscription2) {
     'use strict';
 
-    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+    function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
 
     function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
     function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
-    var _Observable3 = _interopRequireDefault(_Observable2);
+    var _Observable3 = _interopRequire(_Observable2);
 
-    var _$$observer = _interopRequireDefault(_utilSymbol_observer);
+    var _$$observer = _interopRequire(_utilSymbol_observer);
 
-    var _Subscription3 = _interopRequireDefault(_Subscription2);
+    var _Subscription3 = _interopRequire(_Subscription2);
 
     var Subject = (function (_Observable) {
         function Subject() {
@@ -32,9 +32,9 @@ define(['exports', 'module', './Observable', './util/Symbol_observer', './Subscr
             }
         };
 
-        Subject.prototype[_$$observer['default']] = function (observer) {
+        Subject.prototype[_$$observer] = function (observer) {
             this.observers.push(observer);
-            var subscription = new _Subscription3['default'](null, observer);
+            var subscription = new _Subscription3(null, observer);
             return subscription;
         };
 
@@ -92,7 +92,7 @@ define(['exports', 'module', './Observable', './util/Symbol_observer', './Subscr
         };
 
         return Subject;
-    })(_Observable3['default']);
+    })(_Observable3);
 
     module.exports = Subject;
 
@@ -116,5 +116,5 @@ define(['exports', 'module', './Observable', './util/Symbol_observer', './Subscr
         };
 
         return SubjectSubscription;
-    })(_Subscription3['default']);
+    })(_Subscription3);
 });

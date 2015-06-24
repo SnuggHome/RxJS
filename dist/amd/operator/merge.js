@@ -3,11 +3,11 @@ define(['exports', 'module', '../Observable'], function (exports, module, _Obser
 
     module.exports = merge;
 
-    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+    function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
 
-    var _Observable2 = _interopRequireDefault(_Observable);
+    var _Observable2 = _interopRequire(_Observable);
 
     function merge(observables) {
-        return _Observable2['default'].fromArray([this].concat(observables)).mergeAll();
+        return _Observable2.fromArray([this].concat(observables)).mergeAll();
     }
 });

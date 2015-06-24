@@ -1,10 +1,10 @@
 define(['exports', 'module', './Scheduler'], function (exports, module, _Scheduler) {
   'use strict';
 
-  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+  function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
 
-  var _Scheduler2 = _interopRequireDefault(_Scheduler);
+  var _Scheduler2 = _interopRequire(_Scheduler);
 
-  var immediate = new _Scheduler2['default']();
+  var immediate = new _Scheduler2();
   module.exports = immediate;
 });

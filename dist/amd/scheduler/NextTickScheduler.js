@@ -1,13 +1,13 @@
 define(['exports', 'module', './Scheduler', './SchedulerActions'], function (exports, module, _Scheduler2, _SchedulerActions) {
     'use strict';
 
-    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+    function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
 
     function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
     function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
-    var _Scheduler3 = _interopRequireDefault(_Scheduler2);
+    var _Scheduler3 = _interopRequire(_Scheduler2);
 
     var NextTickScheduler = (function (_Scheduler) {
         function NextTickScheduler() {
@@ -27,7 +27,7 @@ define(['exports', 'module', './Scheduler', './SchedulerActions'], function (exp
         };
 
         return NextTickScheduler;
-    })(_Scheduler3['default']);
+    })(_Scheduler3);
 
     module.exports = NextTickScheduler;
 });

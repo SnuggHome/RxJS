@@ -3,23 +3,23 @@ define(['exports', 'module', '../Observer', '../Subscription', '../SerialSubscri
 
     module.exports = mergeAll;
 
-    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+    function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
 
     function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
     function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
-    var _Observer4 = _interopRequireDefault(_Observer3);
+    var _Observer4 = _interopRequire(_Observer3);
 
-    var _Subscription2 = _interopRequireDefault(_Subscription);
+    var _Subscription2 = _interopRequire(_Subscription);
 
-    var _SerialSubscription2 = _interopRequireDefault(_SerialSubscription);
+    var _SerialSubscription2 = _interopRequire(_SerialSubscription);
 
-    var _CompositeSubscription2 = _interopRequireDefault(_CompositeSubscription);
+    var _CompositeSubscription2 = _interopRequire(_CompositeSubscription);
 
-    var _Observable3 = _interopRequireDefault(_Observable2);
+    var _Observable3 = _interopRequire(_Observable2);
 
-    var _$$observer = _interopRequireDefault(_utilSymbol_observer);
+    var _$$observer = _interopRequire(_utilSymbol_observer);
 
     var MergeAllObserver = (function (_Observer) {
         function MergeAllObserver(destination, concurrent) {
@@ -29,7 +29,7 @@ define(['exports', 'module', '../Observer', '../Subscription', '../SerialSubscri
             this.stopped = false;
             this.buffer = [];
             this.concurrent = concurrent;
-            this.subscriptions = new _CompositeSubscription2['default']();
+            this.subscriptions = new _CompositeSubscription2();
         }
 
         _inherits(MergeAllObserver, _Observer);
@@ -39,10 +39,10 @@ define(['exports', 'module', '../Observer', '../Subscription', '../SerialSubscri
             var concurrent = this.concurrent;
             var subscriptions = this.subscriptions;
             if (subscriptions.length < concurrent) {
-                var innerSubscription = new _SerialSubscription2['default'](null);
+                var innerSubscription = new _SerialSubscription2(null);
                 var innerObserver = new MergeInnerObserver(this, innerSubscription);
                 subscriptions.add(innerSubscription);
-                innerSubscription.add(observable[_$$observer['default']](innerObserver));
+                innerSubscription.add(observable[_$$observer](innerObserver));
             } else if (buffer) {
                 buffer.push(observable);
             }
@@ -77,7 +77,7 @@ define(['exports', 'module', '../Observer', '../Subscription', '../SerialSubscri
         };
 
         return MergeAllObserver;
-    })(_Observer4['default']);
+    })(_Observer4);
 
     var MergeInnerObserver = (function (_Observer2) {
         function MergeInnerObserver(parent, subscription) {
@@ -95,7 +95,7 @@ define(['exports', 'module', '../Observer', '../Subscription', '../SerialSubscri
         };
 
         return MergeInnerObserver;
-    })(_Observer4['default']);
+    })(_Observer4);
 
     var MergeAllObservable = (function (_Observable) {
         function MergeAllObservable(source, concurrent) {
@@ -110,11 +110,11 @@ define(['exports', 'module', '../Observer', '../Subscription', '../SerialSubscri
 
         MergeAllObservable.prototype.subscriber = function subscriber(observer) {
             var mergeAllObserver = new MergeAllObserver(observer, this.concurrent);
-            return _Subscription2['default'].from(this.source.subscriber(mergeAllObserver), mergeAllObserver);
+            return _Subscription2.from(this.source.subscriber(mergeAllObserver), mergeAllObserver);
         };
 
         return MergeAllObservable;
-    })(_Observable3['default']);
+    })(_Observable3);
 
     function mergeAll() {
         var concurrent = arguments[0] === undefined ? Number.POSITIVE_INFINITY : arguments[0];

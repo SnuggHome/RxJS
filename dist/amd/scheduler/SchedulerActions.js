@@ -3,17 +3,17 @@ define(['exports', '../SerialSubscription', '../util/Immediate', '../Subscriptio
 
     exports.__esModule = true;
 
-    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+    function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
 
     function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
     function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
-    var _SerialSubscription3 = _interopRequireDefault(_SerialSubscription2);
+    var _SerialSubscription3 = _interopRequire(_SerialSubscription2);
 
-    var _Immediate = _interopRequireDefault(_utilImmediate);
+    var _Immediate = _interopRequire(_utilImmediate);
 
-    var _Subscription2 = _interopRequireDefault(_Subscription);
+    var _Subscription2 = _interopRequire(_Subscription);
 
     var ScheduledAction = (function (_SerialSubscription) {
         function ScheduledAction(scheduler, state, work) {
@@ -39,7 +39,7 @@ define(['exports', '../SerialSubscription', '../util/Immediate', '../Subscriptio
             if (this.unsubscribed) {
                 throw new Error('How did did we execute a canceled ScheduledAction?');
             }
-            this.add(_Subscription2['default'].from(this.work(this.state), this.observer));
+            this.add(_Subscription2.from(this.work(this.state), this.observer));
         };
 
         ScheduledAction.prototype.unsubscribe = function unsubscribe() {
@@ -55,7 +55,7 @@ define(['exports', '../SerialSubscription', '../util/Immediate', '../Subscriptio
         };
 
         return ScheduledAction;
-    })(_SerialSubscription3['default']);
+    })(_SerialSubscription3);
 
     exports.ScheduledAction = ScheduledAction;
 
@@ -77,7 +77,7 @@ define(['exports', '../SerialSubscription', '../util/Immediate', '../Subscriptio
             if (!scheduler.scheduled) {
                 scheduler.active = true;
                 scheduler.scheduled = true;
-                this.id = _Immediate['default'].setImmediate(function () {
+                this.id = _Immediate.setImmediate(function () {
                     self.id = void 0;
                     scheduler.active = false;
                     scheduler.scheduled = false;
@@ -95,7 +95,7 @@ define(['exports', '../SerialSubscription', '../util/Immediate', '../Subscriptio
                 var id = this.id;
                 if (id) {
                     this.id = void 0;
-                    _Immediate['default'].clearImmediate(id);
+                    _Immediate.clearImmediate(id);
                 }
             }
             _ScheduledAction.prototype.unsubscribe.call(this);

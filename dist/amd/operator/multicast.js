@@ -3,12 +3,12 @@ define(['exports', 'module', '../ConnectableObservable'], function (exports, mod
 
     module.exports = multicast;
 
-    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+    function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
 
-    var _ConnectableObservable2 = _interopRequireDefault(_ConnectableObservable);
+    var _ConnectableObservable2 = _interopRequire(_ConnectableObservable);
 
     function multicast(subjectFactory) {
-        return new _ConnectableObservable2['default'](this, subjectFactory);
+        return new _ConnectableObservable2(this, subjectFactory);
     }
 
     ;

@@ -1,25 +1,36 @@
 define(['exports', 'module', '../util/tryCatch', '../util/errorObject', '../Observable', '../Subscription', '../CompositeSubscription', './fromEventPattern'], function (exports, module, _utilTryCatch, _utilErrorObject, _Observable2, _Subscription, _CompositeSubscription, _fromEventPattern) {
+    /**
+     * Creates an observable sequence by adding an event listener to the matching DOMElement or each item in the NodeList.
+     *
+     * @example
+     *   var source = Rx.Observable.fromEvent(element, 'mouseup');
+     *
+     * @param {any} element The DOMElement or NodeList to attach a listener.
+     * @param {string} eventName The event name to attach the observable sequence.
+     * @param {Function} [selector] A selector which takes the arguments from the event handler to produce a single item to yield on next.
+     * @returns {Observable} An observable sequence of events from the specified element and the specified event.
+     */
     'use strict';
 
     module.exports = fromEvent;
 
-    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+    function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
 
     function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
     function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
-    var _try_catch = _interopRequireDefault(_utilTryCatch);
+    var _try_catch = _interopRequire(_utilTryCatch);
 
-    var _error_obj = _interopRequireDefault(_utilErrorObject);
+    var _error_obj = _interopRequire(_utilErrorObject);
 
-    var _Observable3 = _interopRequireDefault(_Observable2);
+    var _Observable3 = _interopRequire(_Observable2);
 
-    var _Subscription2 = _interopRequireDefault(_Subscription);
+    var _Subscription2 = _interopRequire(_Subscription);
 
-    var _CompositeSubscription2 = _interopRequireDefault(_CompositeSubscription);
+    var _CompositeSubscription2 = _interopRequire(_CompositeSubscription);
 
-    var _fromEventPattern2 = _interopRequireDefault(_fromEventPattern);
+    var _fromEventPattern2 = _interopRequire(_fromEventPattern);
 
     var EventListenerObservable = (function (_Observable) {
         function EventListenerObservable(element, eventName, selector) {
@@ -39,9 +50,9 @@ define(['exports', 'module', '../util/tryCatch', '../util/errorObject', '../Obse
                 var result = e;
                 var iteratorResult;
                 if (selector) {
-                    result = (0, _try_catch['default'])(selector).apply(this, arguments);
-                    if (result === _error_obj['default']) {
-                        observer['throw'](_error_obj['default'].e);
+                    result = _try_catch(selector).apply(this, arguments);
+                    if (result === _error_obj) {
+                        observer['throw'](_error_obj.e);
                         listeners.unsubscribe();
                         return;
                     }
@@ -55,19 +66,19 @@ define(['exports', 'module', '../util/tryCatch', '../util/errorObject', '../Obse
         };
 
         return EventListenerObservable;
-    })(_Observable3['default']);
+    })(_Observable3);
 
     function createListener(element, name, handler, observer) {
         if (element.addEventListener) {
             element.addEventListener(name, handler, false);
-            return new _Subscription2['default'](function () {
+            return new _Subscription2(function () {
                 element.removeEventListener(name, handler, false);
             }, observer);
         }
         throw new Error('No listener found.');
     }
     function createEventListener(element, eventName, handler, observer) {
-        var subscriptions = new _CompositeSubscription2['default']();
+        var subscriptions = new _CompositeSubscription2();
         // Asume NodeList
         if (Object.prototype.toString.call(element) === '[object NodeList]') {
             for (var i = 0, len = element.length; i < len; i++) {
@@ -78,24 +89,12 @@ define(['exports', 'module', '../util/tryCatch', '../util/errorObject', '../Obse
         }
         return subscriptions;
     }
-    /**
-     * Creates an observable sequence by adding an event listener to the matching DOMElement or each item in the NodeList.
-     *
-     * @example
-     *   var source = Rx.Observable.fromEvent(element, 'mouseup');
-     *
-     * @param {any} element The DOMElement or NodeList to attach a listener.
-     * @param {string} eventName The event name to attach the observable sequence.
-     * @param {Function} [selector] A selector which takes the arguments from the event handler to produce a single item to yield on next.
-     * @returns {Observable} An observable sequence of events from the specified element and the specified event.
-     */
-
     function fromEvent(element, eventName) {
         var selector = arguments[2] === undefined ? null : arguments[2];
 
         // Node.js specific
         if (element.addListener) {
-            return (0, _fromEventPattern2['default'])(function (h) {
+            return _fromEventPattern2(function (h) {
                 element.addListener(eventName, h);
             }, function (h) {
                 element.removeListener(eventName, h);
@@ -106,7 +105,7 @@ define(['exports', 'module', '../util/tryCatch', '../util/errorObject', '../Obse
         if (!config.useNativeEvents) {
             // Handles jq, Angular.js, Zepto, Marionette, Ember.js
             if (typeof element.on === 'function' && typeof element.off === 'function') {
-                return (0, _fromEventPattern2['default'])(function (h) {
+                return _fromEventPattern2(function (h) {
                     element.on(eventName, h);
                 }, function (h) {
                     element.off(eventName, h);

@@ -92,7 +92,7 @@ var CompositeSubscription = (function (_Subscription) {
             return;
         }
         this.unsubscribed = true;
-        var subscriptions = (0, _utilArraySlice2['default'])(this._subscriptions);
+        var subscriptions = _utilArraySlice2['default'](this._subscriptions);
         var subscriptionCount = subscriptions && subscriptions.length || 0;
         var subscriptionIndex = -1;
         this._subscriptions = undefined;
@@ -1027,6 +1027,18 @@ module.exports = exports['default'];
 'use strict';
 
 exports.__esModule = true;
+
+/**
+ * Creates an observable sequence by adding an event listener to the matching DOMElement or each item in the NodeList.
+ *
+ * @example
+ *   var source = Rx.Observable.fromEvent(element, 'mouseup');
+ *
+ * @param {any} element The DOMElement or NodeList to attach a listener.
+ * @param {string} eventName The event name to attach the observable sequence.
+ * @param {Function} [selector] A selector which takes the arguments from the event handler to produce a single item to yield on next.
+ * @returns {Observable} An observable sequence of events from the specified element and the specified event.
+ */
 exports['default'] = fromEvent;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -1077,7 +1089,7 @@ var EventListenerObservable = (function (_Observable) {
             var result = e;
             var iteratorResult;
             if (selector) {
-                result = (0, _utilTryCatch2['default'])(selector).apply(this, arguments);
+                result = _utilTryCatch2['default'](selector).apply(this, arguments);
                 if (result === _utilErrorObject2['default']) {
                     observer['throw'](_utilErrorObject2['default'].e);
                     listeners.unsubscribe();
@@ -1116,24 +1128,12 @@ function createEventListener(element, eventName, handler, observer) {
     }
     return subscriptions;
 }
-/**
- * Creates an observable sequence by adding an event listener to the matching DOMElement or each item in the NodeList.
- *
- * @example
- *   var source = Rx.Observable.fromEvent(element, 'mouseup');
- *
- * @param {any} element The DOMElement or NodeList to attach a listener.
- * @param {string} eventName The event name to attach the observable sequence.
- * @param {Function} [selector] A selector which takes the arguments from the event handler to produce a single item to yield on next.
- * @returns {Observable} An observable sequence of events from the specified element and the specified event.
- */
-
 function fromEvent(element, eventName) {
     var selector = arguments[2] === undefined ? null : arguments[2];
 
     // Node.js specific
     if (element.addListener) {
-        return (0, _fromEventPattern2['default'])(function (h) {
+        return _fromEventPattern2['default'](function (h) {
             element.addListener(eventName, h);
         }, function (h) {
             element.removeListener(eventName, h);
@@ -1144,7 +1144,7 @@ function fromEvent(element, eventName) {
     if (!config.useNativeEvents) {
         // Handles jq, Angular.js, Zepto, Marionette, Ember.js
         if (typeof element.on === 'function' && typeof element.off === 'function') {
-            return (0, _fromEventPattern2['default'])(function (h) {
+            return _fromEventPattern2['default'](function (h) {
                 element.on(eventName, h);
             }, function (h) {
                 element.off(eventName, h);
@@ -1160,6 +1160,14 @@ module.exports = exports['default'];
 'use strict';
 
 exports.__esModule = true;
+
+/**
+ * Creates an observable sequence from an event emitter via an addHandler/removeHandler pair.
+ * @param {Function} addHandler The function to add a handler to the emitter.
+ * @param {Function} [removeHandler] The optional function to remove a handler from an emitter.
+ * @param {Function} [selector] A selector which takes the arguments from the event handler to produce a single item to yield on next.
+ * @returns {Observable} An observable sequence which wraps an event from an event emitter
+ */
 exports['default'] = fromEventPattern;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -1201,7 +1209,7 @@ var FromEventPatternObservable = (function (_Observable) {
         function innerHandler(e) {
             var result = e;
             if (selector) {
-                result = (0, _utilTryCatch2['default'])(selector).apply(this, arguments);
+                result = _utilTryCatch2['default'](selector).apply(this, arguments);
                 if (result === _utilErrorObject2['default']) {
                     _subscriber['throw'](_utilErrorObject2['default'].e);
                     unsubscribe();
@@ -1222,14 +1230,6 @@ var FromEventPatternObservable = (function (_Observable) {
 
     return FromEventPatternObservable;
 })(_Observable3['default']);
-
-/**
- * Creates an observable sequence from an event emitter via an addHandler/removeHandler pair.
- * @param {Function} addHandler The function to add a handler to the emitter.
- * @param {Function} [removeHandler] The optional function to remove a handler from an emitter.
- * @param {Function} [selector] A selector which takes the arguments from the event handler to produce a single item to yield on next.
- * @returns {Observable} An observable sequence which wraps an event from an event emitter
- */
 
 function fromEventPattern(addHandler) {
     var removeHandler = arguments[1] === undefined ? null : arguments[1];
@@ -1718,7 +1718,7 @@ var InnerZipObserver = (function (_Observer) {
     };
 
     InnerZipObserver.prototype._sendNext = function _sendNext(args) {
-        var value = (0, _utilTryCatch2['default'])(this.project).apply(this, args);
+        var value = _utilTryCatch2['default'](this.project).apply(this, args);
         if (value === _utilErrorObject2['default']) {
             return this.destination['throw'](_utilErrorObject2['default'].e);
         } else {
@@ -1794,7 +1794,7 @@ var FilterObserver = (function (_Observer) {
     _inherits(FilterObserver, _Observer);
 
     FilterObserver.prototype._next = function _next(value) {
-        var result = (0, _utilTryCatch2['default'])(this.predicate).call(this, value);
+        var result = _utilTryCatch2['default'](this.predicate).call(this, value);
         if (result === _utilErrorObject2['default']) {
             return this.destination['throw'](_utilErrorObject2['default'].e);
         } else if (Boolean(result)) {
@@ -1896,7 +1896,7 @@ var MapObserver = (function (_Observer) {
     _inherits(MapObserver, _Observer);
 
     MapObserver.prototype._next = function _next(value) {
-        value = (0, _utilTryCatch2['default'])(this.project).call(this, value);
+        value = _utilTryCatch2['default'](this.project).call(this, value);
         if (value === _utilErrorObject2['default']) {
             return this.destination['throw'](_utilErrorObject2['default'].e);
         } else {
@@ -2337,7 +2337,7 @@ var ReduceObserver = (function (_Observer) {
     _inherits(ReduceObserver, _Observer);
 
     ReduceObserver.prototype._next = function _next(value) {
-        var result = (0, _utilTryCatch2['default'])(this.processor)(this.aggregate, value);
+        var result = _utilTryCatch2['default'](this.processor)(this.aggregate, value);
         if (result === _utilErrorObject2['default'].e) {
             this.destination['throw'](_utilErrorObject2['default'].e);
         } else {
@@ -2958,14 +2958,15 @@ var nextTick = new _NextTickScheduler2['default']();
 exports['default'] = nextTick;
 module.exports = exports['default'];
 },{"./NextTickScheduler":41}],46:[function(require,module,exports){
-/**
-All credit for this helper goes to http://github.com/YuzuJS/setImmediate
-*/
 "use strict";
 
 exports.__esModule = true;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+/**
+All credit for this helper goes to http://github.com/YuzuJS/setImmediate
+*/
 
 var _root = require("./root");
 
